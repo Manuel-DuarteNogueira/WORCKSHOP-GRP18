@@ -23,7 +23,7 @@ const Home = () => {
 
       {/* Calendrier */}
       <View style={styles.calendarContainer}>
-        <Text style={styles.calendarText}>S    M    T    W    T    F    S</Text>
+        <Text style={styles.calendarText}>L    M    M    J    V    S    D</Text>
         {/* Simplification d'un affichage de calendrier */}
         <Text style={styles.calendarDays}>1    2    3    4    5    6    7</Text>
         <Text style={styles.calendarDays}>8    9   10   11   12   13   14</Text>
