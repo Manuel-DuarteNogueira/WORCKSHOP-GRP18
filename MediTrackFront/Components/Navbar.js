@@ -20,7 +20,7 @@ const Navbar = () => {
       }}
     >
       <Tab.Screen
-        name="Accueil"
+        name="Analyse"
         component={Home}
         options={{
           tabBarIcon: ({ color, size }) => (
