@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Home = () => {
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDatePress = (date) => {
+    setSelectedDate(date);
+  };
+
+  const renderDay = (day) => (
+    <TouchableOpacity 
+      key={day}
+      onPress={() => handleDatePress(day)}
+      style={[
+        styles.calendarDay,
+        selectedDate === day && styles.selectedDay
+      ]}
+    >
+      <Text style={styles.dayText}>{day}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       {/* En-tête de l'application */}
@@ -24,12 +43,22 @@ const Home = () => {
       {/* Calendrier */}
       <View style={styles.calendarContainer}>
         <Text style={styles.calendarText}>L    M    M    J    V    S    D</Text>
-        {/* Simplification d'un affichage de calendrier */}
-        <Text style={styles.calendarDays}>1    2    3    4    5    6    7</Text>
-        <Text style={styles.calendarDays}>8    9   10   11   12   13   14</Text>
-        <Text style={styles.calendarDays}>15  16   17   18   19   20   21</Text>
-        <Text style={styles.calendarDays}>22  23   24   25   26   27   28</Text>
-        <Text style={styles.calendarDays}>29  30   31</Text>
+
+        <View style={styles.week}>
+          {['1', '2', '3', '4', '5', '6', '7'].map(renderDay)}
+        </View>
+        <View style={styles.week}>
+          {['8', '9', '10', '11', '12', '13', '14'].map(renderDay)}
+        </View>
+        <View style={styles.week}>
+          {['15', '16', '17', '18', '19', '20', '21'].map(renderDay)}
+        </View>
+        <View style={styles.week}>
+          {['22', '23', '24', '25', '26', '27', '28'].map(renderDay)}
+        </View>
+        <View style={styles.week}>
+          {['29', '30', '31'].map(renderDay)}
+        </View>
       </View>
 
       {/* Jours consécutifs */}
@@ -39,8 +68,6 @@ const Home = () => {
         </View>
         <Text style={styles.counterLabel}>jours consécutifs</Text>
       </View>
-
-      
     </View>
   );
 };
@@ -56,24 +83,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 20,
-  },
-  userInfo: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  userName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  userDetail: {
-    fontSize: 12,
-    color: '#888',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 20,
   },
   buttonGroup: {
     flexDirection: 'row',
@@ -109,10 +118,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16,
   },
-  calendarDays: {
-    textAlign: 'center',
-    fontSize: 16,
+  week: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
+  },
+  calendarDay: {
+    padding: 10,
+    backgroundColor: '#D9E6F2',
+    borderRadius: 10,
+    width: 40,
+    alignItems: 'center',
+  },
+  selectedDay: {
+    backgroundColor: '#6CEAB7',
+  },
+  dayText: {
+    fontSize: 16,
+    color: '#555',
   },
   counterContainer: {
     alignItems: 'center',
@@ -134,20 +157,6 @@ const styles = StyleSheet.create({
   counterLabel: {
     fontSize: 16,
     color: '#555',
-  },
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#4B89E0',
-    paddingVertical: 15,
-  },
-  bottomBarIcon: {
-    fontSize: 24,
-    color: '#FFFFFF',
   },
 });
 
